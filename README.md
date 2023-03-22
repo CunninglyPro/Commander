@@ -21,10 +21,12 @@ Commander is an open source Discord Bot built with using Discord.JS v14.
 ### Setting up MongoDB
 
 1. Go https://www.mongodb.com/ and register or sign in with your account.
-2. Create a free MongoDB Atlas Server.
-3. Once you have created your MongoDB Atlas Server, Create a Database.
-4. Go to Database Access and Add New Database User.
-5. 
+2. Create a free Shared Cloud Database.
+4. In the dashboard, click on Add current IP Address
+5. Click on Connect button next to your Database Name.
+6. Set a user and password, then click on Create Database User.
+7. In Choose a connection method, select Connect your application.
+8. 
 
 ### Setting Up Bot Configuration
 
