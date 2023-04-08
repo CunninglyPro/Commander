@@ -1,35 +1,40 @@
-# Commander
-Commander is an open source Discord Bot built with using Discord.JS v14.
+<h1 align="center">Commander Discord Bot</h1>
 
-## Installation
+<p align="center">Commander Discord Bot is an open source and powerful Discord bot written in JavaScript and Node.js, and Discord.js v14 library. This bot is designed to enhance your Discord server experience by providing a wide range of features and commands for managing, moderating, and customizing your server.</p>
 
-### Creating A Discord Bot
+<h2 align="center">Features</h2>
 
-- If you already have a bot, you can **skip this step**.
+- Moderation Tools (with an advanced warning system): Manage your server with ease using commands like ban, kick, timeout, and more. The bot also includes a comprehensive warning system for managing user behavior.
+- Giveaways: Host giveaways in your server with ease using the bot's built-in giveaway commands.
+- Advanced Ticketing System: Provide support to your server members with a fully functional ticketing system that allows them to create, manage, and close support tickets, and automate transcripts.
+- Advanced Levelling System: Keep your server members engaged with a robust levelling system that rewards them for their activity and participation in the server.
+- AFK System: Set yourself as AFK and let others know when you're away with the bot's AFK system that automatically responds to mentions.
+- Minecraft Server Status: Check the status of your Minecraft server using the bot's built-in commands that provide real-time information on server uptime, player count, and more.
+- Fun and Games: Entertain your server members with a variety of fun and interactive commands, including memes, would you rather, etc.
+- In-built Translator: Translate messages from other languages to English without leaving Discord using the bot's in-built translator feature.
+- Fully Functional GUI-based Calculator: Perform calculations right within Discord with the bot's calculator commands that provide a graphical user interface for easy calculations.
 
-1. Go to [Discord Developer Portal](https://discord.com/developers/applications).
-2. Log in to your Discord account.
-3. Click on `New Application` button to create an application.
-4. Once you created your application, click on the application to select it.
-5. Go to the Bot section and click on `Add Bot`.
-6. Go to OAuth2 then URL Generator.
-7. Select `bot` and `application.commands` scopes.
-8. Select any Bot Permission you want, preferabley Administrator.
-9. Copy the URL that is generated and paste that in the URL bar of your browser.
-10. Select a server for the Bot to join.
+<h2 align="center">Installation</h2>
 
-### Setting up MongoDB
+To get started with Commander Discord Bot, follow these simple steps:
 
-1. Go https://www.mongodb.com/ and register or sign in with your account.
-2. Create a free Shared Cloud Database.
-4. In the dashboard, click on Add current IP Address
-5. Click on Connect button next to your Database Name.
-6. Set a user and password, then click on Create Database User.
-7. In Choose a connection method, select Connect your application.
-8. 
+- Download the latest version of the bot from the releases page.
+- Remove `.example` from `env.example` and fill up your credentials requied for the bot to work.
+- Run the `start.bat` file to start the bot.
 
-### Setting Up Bot Configuration
+<h2 align="center">Contributing</h2>
 
-1. Remove `example` from `example.env` file.
-2. Add your Bot Token (From Bot section of Discord Developer Portal)
-3. Add your MongoDB URL
+<p align="center">
+  If you would like to contribute to Commander Discord Bot, you are welcome to submit pull requests or open issues on the GitHub repository.
+</p>
+
+<h2 align="center">License</h2>
+
+<p align="center">
+  Commander Discord Bot is released under the <a href="LICENSE">MIT License</a>.
+</p>
+
+<h2 align="center">Support</h2>
+
+<p align="center">
+  If you have any questions or need support with Commander Discord Bot, please join our <a href="https://discord.com/invite/w4PAE3HkDF">Discord Server</a>.
