@@ -34,7 +34,7 @@ To get started with Commander Discord Bot, follow these simple steps:
 <h2 align="center">License</h2>
 
 <p align="center">
-  Commander Discord Bot is released under the <a href="LICENSE">MIT License</a>.
+  Commander Discord Bot is released under the <a href="LICENSE.md">MIT License</a>.
 </p>
 
 <h2 align="center">Support</h2>
