@@ -3,7 +3,7 @@
 <p align="center">Commander Discord Bot is an open source and powerful Discord bot written in JavaScript and Node.js, and Discord.js v14 library. This bot is designed to enhance your Discord server experience by providing a wide range of features and commands for managing, moderating, and customizing your server.</p>
 
 <p align="center">Commander#1211 is the official bot running on the Commander project.
-(Visit the Commander's Website)[https://wholeindia.babsoft.in/commander.html]</p>
+  <a href="https://wholeindia.babsoft.in/commander.html"> Visit the Commander's Website</a></p>
 
 <h2 align="center">Features</h2>
 
