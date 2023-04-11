@@ -2,6 +2,8 @@
 
 <p align="center">Commander Discord Bot is an open source and powerful Discord bot written in JavaScript and Node.js, and Discord.js v14 library. This bot is designed to enhance your Discord server experience by providing a wide range of features and commands for managing, moderating, and customizing your server.</p>
 
+<p align="center">Commander#1211 is the official bot running on the Commander project.</p>
+
 <h2 align="center">Features</h2>
 
 - Moderation Tools (with an advanced warning system): Manage your server with ease using commands like ban, kick, timeout, and more. The bot also includes a comprehensive warning system for managing user behavior.
@@ -18,9 +20,10 @@
 
 To get started with Commander Discord Bot, follow these simple steps:
 
+- Install Node.js 16 or above.
 - Download the latest version of the bot from the releases page.
-- Remove `.example` from `env.example` and fill up your credentials requied for the bot to work.
-- Run the `start.bat` file to start the bot.
+- Fill up your credentials requied for the bot to work.
+- Run the `start.cmd` file to start the bot.
 
 <h2 align="center">Contributing</h2>
 
