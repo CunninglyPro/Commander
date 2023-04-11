@@ -2,7 +2,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder, PermissionsBitField, PermissionFlagsBits } = require('discord.js');
 const { QuickDB } = require(`quick.db`);
 const db = new QuickDB();
-const warnSchema = require(`../../Schemas.js/warnSchema`)
+const warnSchema = require(`../../schemas/warnSchema`)
 
 module.exports = {
 

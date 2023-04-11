@@ -19,7 +19,7 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setColor("0x2f3136")
             .setDescription(`**${user.tag}** has **${i}** invites in **${interaction.guild.name}**.`)
-        await interaction.reply({ embeds: [embed], ephemeral: true }).catch(err => {
+        await interaction.reply({ embeds: [embed] }).catch(err => {
             console.log(err)
         });
     }

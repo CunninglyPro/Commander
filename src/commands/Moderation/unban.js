@@ -1,59 +1,124 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, PermissionsBitField, ChannelType, PermissionFlagsBits } = require('discord.js')
+const { SlashCommandBuilder } = require("@discordjs/builders");
+const {
+  EmbedBuilder,
+  PermissionsBitField,
+  ChannelType,
+  PermissionFlagsBits,
+} = require("discord.js");
 
 module.exports = {
-    data: new SlashCommandBuilder()
-    .setName('unban')
-    .setDescription(`Unban a member from server.`)
-    .addUserOption(option => option.setName(`user`).setDescription(`The member to unban.`).setRequired(true))
-    .addStringOption(option => option.setName(`reason`).setDescription(`The reason of unbanning the member.`))
+  data: new SlashCommandBuilder()
+    .setName("unban")
+    .setDescription(`Unban a member or everyone from server.`)
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName(`member`)
+        .setDescription(`Unban a member from server.`)
+        .addUserOption((option) =>
+          option
+            .setName(`member`)
+            .setDescription(`The member to unban.`)
+            .setRequired(true)
+        )
+        .addStringOption((option) =>
+          option
+            .setName(`reason`)
+            .setDescription(`The reason of unbanning the member.`)
+        )
+    )
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName(`everyone`)
+        .setDescription(`Unban everyone from server.`)
+    )
     .setDefaultMemberPermissions(PermissionFlagsBits.BanMembers),
 
-    async execute(interaction, client) {
+  async execute(interaction) {
+    const subcommand = interaction.options.getSubcommand();
 
-        const userID = interaction.options.getUser(`user`);
+    if (subcommand === `member`) {
+      const userID = interaction.options.getUser(`member`);
 
-        let reason = interaction.options.getString(`reason`);
-        if (!reason) reason = `Unknown Reason`;
+      let reason = interaction.options.getString(`reason`);
+      if (!reason) reason = `Unknown Reason`;
 
-        const noPerms = new EmbedBuilder()
-        .setAuthor({name: `Error!`, iconURL: `https://cdn0.iconfinder.com/data/icons/shift-interfaces/32/Error-512.png`})
-        .setDescription(`You are not allowed to use unban command.`)
-        .setColor('DarkRed')
+      const selfBan = new EmbedBuilder()
+        .setDescription(
+          `<:cross:1082334173915775046> You can't use the unban command on yourself.`
+        )
+        .setColor("Red");
 
-        const selfBan = new EmbedBuilder()
-        .setAuthor({name: `Error!`, iconURL: `https://cdn0.iconfinder.com/data/icons/shift-interfaces/32/Error-512.png`})
-        .setDescription(`You can't use the unban command on yourself.`)
-        .setColor('DarkRed')        
+      if (interaction.member.id === userID)
+        return await interaction.reply({ embeds: [selfBan], ephemeral: true });
 
-        if(!interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) return await interaction.reply({ embeds: [noPerms], ephemeral: true });
-        if(interaction.member.id === userID) return await interaction.reply({ embeds: [selfBan], ephemeral: true });
+      const dmMsg = new EmbedBuilder()
+        .setDescription(
+          `<:alert:1082334164189184051> You have been unbanned from **${interaction.guild.name}**.\nReason: ${reason}`
+        )
+        .setColor("Red");
 
-        const dmMsg = new EmbedBuilder()
-        .setAuthor({name: `You have been unbanned from ${interaction.guild.name} for ${reason}`, iconURL: `https://cdn3.emoji.gg/emojis/3968-discord-banhammer.png`})
-        .setColor('Red')
+      const sucess = new EmbedBuilder()
+        .setDescription(
+          `<:check:1082334169197187153> **${userID.username}#${userID.discriminator}** has been unbanned.`
+        )
+        .setColor("Green");
 
-        const sucess = new EmbedBuilder()
-        .setAuthor({name: `Sucessfully Unbanned`, iconURL: `https://upload.wikimedia.org/wikipedia/commons/thumb/c/c6/Sign-check-icon.png/800px-Sign-check-icon.png`})
-        .setDescription(`${userID} for ${reason}.`)
-        .setColor('Green')
+      const fail = new EmbedBuilder()
+        .setDescription(
+          `<:cross:1082334173915775046> Unable to unban **${userID.username}#${userID.discriminator}**.`
+        )
+        .setColor("Red");
 
-        const fail = new EmbedBuilder()
-        .setAuthor({name: `Error!`, iconURL: `https://cdn0.iconfinder.com/data/icons/shift-interfaces/32/Error-512.png`})
-        .setDescription(`Unable to unban this user.`)
-        .setColor('DarkRed')
-
-        await interaction.guild.bans.fetch()
-        .then(async bans => {
-
-            await interaction.guild.bans.remove(userID, reason).catch(err => {
-                return;
-            })
+      await interaction.guild.bans
+        .fetch()
+        .then(async (bans) => {
+          await interaction.guild.bans.remove(userID, reason).catch((err) => {
+            return;
+          });
         })
-        
-        await interaction.reply({ embeds: [sucess], ephemeral: true }).catch(err => {
-            return interaction.reply({ embeds: [fail]})
-        })
+        .then(await interaction.reply({ embeds: [sucess] }))
+        .catch((err) => {
+          return interaction.reply({ embeds: [fail] });
+        });
+      await userID.send({ embeds: [dmMsg] }).catch((err) => {
+        return;
+      });
     }
 
-}
+    if (subcommand === `everyone`) {
+
+        await interaction.deferReply();
+
+      try {
+
+        const sucess = new EmbedBuilder()
+          .setDescription(
+            `<:check:1082334169197187153> All bans have been removed from **${interaction.guild.name}**.`
+          )
+          .setColor("Green");
+
+        const fail = new EmbedBuilder()
+          .setDescription(
+            `<:cross:1082334173915775046> Unable to remove all bans.`
+          )
+          .setColor("Red");
+
+        const bannedMembers = await interaction.guild.bans.fetch();
+
+        await Promise.all(
+          bannedMembers.map((member) => {
+            return interaction.guild.members.unban(member.user.id);
+          })
+        );
+
+        return interaction.editReply({
+          embeds: [sucess],
+        });
+      } catch (error) {
+        return interaction.editReply({
+            embeds: [fail],
+        });
+      }
+    }
+  },
+};

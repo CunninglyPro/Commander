@@ -17,7 +17,6 @@ module.exports = {
         .setDescription(`:hourglass: **Your Ping:** ${ping} ms \n:sparkles: **API Delay:** ${apiping} ms`)
         
          await interaction.deferReply();
-         await wait(4000);
          await interaction.editReply({ embeds: [pingEmbed] });
     }
 

@@ -16,8 +16,7 @@ const {
             .setColor("0x2f3136")
             .setImage(interaction.targetUser.displayAvatarURL())
             .setTitle(`${interaction.targetUser.username}'s Avatar`)
-        ],
-        ephemeral: true
+        ]
       }).catch(err => {
         console.log(err)
     });

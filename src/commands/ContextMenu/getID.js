@@ -15,8 +15,7 @@ module.exports = {
                 embed
                     .setDescription(`${interaction.targetUser.username}'s ID is **${targetId}**.`)
                     .setColor("0x2f3136")
-            ],
-            ephemeral: true
+            ]
         }).catch(err => {
             console.log(err)
         })

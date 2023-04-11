@@ -16,7 +16,8 @@ module.exports = {
 
     async execute(interaction) {
 
-        const member = interaction.options.getUser(`member`)
+        const memberRaw = interaction.options.getUser(`member`)
+        const member = await interaction.guild.members.fetch(memberRaw.id)
 
         const response = new EmbedBuilder()
             .setColor("0x2f3136")
@@ -30,8 +31,8 @@ module.exports = {
                 { name: "Joined Server", value: `${member.joinedAt ? `<t:${parseInt(member.joinedAt / 1000)}:R>` : "Unknown"}`, inline: true },
                 { name: "Joined Discord", value: `<t:${parseInt(member.createdAt / 1000)}:R>`, inline: true },
             )
-            .setFooter({ text: `Member ID: ${member.id}` })
-        await interaction.reply({ embeds: [response]}).catch(err => {
+            .setFooter({ text: `ID: ${member.id}` })
+        await interaction.reply({ embeds: [response] }).catch(err => {
             console.log(err)
         });
     }

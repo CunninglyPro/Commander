@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder, PermissionsBitField, PermissionFlagsBits } = require('discord.js');
-const warnSchema = require(`../../Schemas.js/warnSchema`)
+const warnSchema = require(`../../schemas/warnSchema`)
 
 module.exports = {
 

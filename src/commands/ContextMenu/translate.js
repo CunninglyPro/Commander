@@ -25,11 +25,11 @@ module.exports = {
         return interaction.reply({
             embeds: [
                 new EmbedBuilder()
-                    .setColor("0x2f3136")
-                    .setTitle(`Translated to English Language`)
+                    .setColor("Blue")
+                    .setTitle(`Translated to English Language.`)
                     .addFields(
                         {
-                            name: `Your text:`,
+                            name: `Previous:`,
                             value: `\`\`\`${raw}\`\`\``,
                         },
                         {
@@ -37,8 +37,7 @@ module.exports = {
                             value: `\`\`\`${translated.text}\`\`\``,
                         }
                     )
-            ],
-            ephemeral: true
+            ]
         }).catch(err => {
             console.log(err)
         })

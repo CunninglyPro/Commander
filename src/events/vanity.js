@@ -1,8 +1,14 @@
-const vanitySchema = require("../Schemas.js/vanitySchema");
+const { Events } = require('discord.js')
+const vanitySchema = require("../schemas/vanitySchema");
 
 module.exports = {
-  name: "presenceUpdate",
-  async execute(oldPresence, newPresence) {
+  name: Events.PresenceUpdate,
+  async execute(newPresence) {
+
+    if (!newPresence || !newPresence.guild) {
+      return;
+    }
+
     const schema = await vanitySchema.findOne({
       GuildID: newPresence.guild.id
     })
@@ -13,7 +19,11 @@ module.exports = {
       return;
 
       const text = schema.Text
-    if (newPresence.activities[0]?.state.toLowerCase().includes(`${text}`)) {
+
+      if (!newPresence.activities[0]?.state) return;
+
+ try {
+  if (newPresence.activities[0]?.state.toLowerCase().includes(`${text}`)) {
       const guildID = schema.GuildID;
       const role = schema.Role;
 
@@ -37,6 +47,8 @@ module.exports = {
       }
 
       await member.roles.remove(role);
+    }} catch (err) {
+      return;
     }
-  },
+  }
 };
